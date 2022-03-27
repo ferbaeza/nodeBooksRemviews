@@ -1,0 +1,6 @@
+#Archivoa a ignorar
+
+node_modules/
+.env
+db_uri.js
+
