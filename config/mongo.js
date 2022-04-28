@@ -1,6 +1,9 @@
 const mongoose = require("mongoose");
 const DB_URI = require("./db_uri");
 
+//const DB_URI = process.env.DB_URI ;
+TODO //adjuntar db_uri.js a .gitignore
+
 const dbConnect =()=>{
     mongoose.connect(DB_URI,{
         useNewUrlParser:true,
