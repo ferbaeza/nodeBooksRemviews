@@ -11,6 +11,7 @@ const getBooks = async (req, res)=>{
     //res.send({data})
     const data = ["hola","fer"]
     res.send({data})
+    console.log(data)
 
 }
 
@@ -27,9 +28,14 @@ const getBook =(req, res)=>{
  * Crear un libro nuevo
  */
 const createBook = async(req, res)=>{
+    /**Al ser recursivo usamos la destructuracion de JS
+     * cons body:body = req
+     * res.send({"Response":body})
+     */
     const { body } = req;
-    console.log(body)
-    res.send(body)
+    console.log(body);
+    //const data = await booksModel.create(body);
+    res.send({"Response":body})
 }
 
 

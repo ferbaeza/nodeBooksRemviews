@@ -1,15 +1,15 @@
 /**Importamos el Modelo */
-const { reviewsModel} =require("../models");
+const { authorsModel} =require("../models");
 
 
 
 /**
  * Obtener datos de BBDD
  */
-const getReviews = async (req, res)=>{
+const getAuthors = async (req, res)=>{
     //const data = await booksModel.find({})
     //res.send({data})
-    const data = ["hola","Melon"]
+    const data = ["hola","fer"]
     res.send({data})
     console.log(data)
 
@@ -20,14 +20,14 @@ const getReviews = async (req, res)=>{
 /**
  * Obtener detalle del Libro
  */
-const getReview =(req, res)=>{
+const getAuthor =(req, res)=>{
 }
 
 
 /**
  * Crear un libro nuevo
  */
-const createReview = async(req, res)=>{
+const createAuthor = async(req, res)=>{
     const { body } = req;
     console.log(body)
     res.send(body)
@@ -37,13 +37,13 @@ const createReview = async(req, res)=>{
 /**
  * Modificar un libro
  */
-const updateReview =(req, res)=>{}
+const updateAuthor =(req, res)=>{}
 
 
 /**
  * Borrar un libro
  */
-const deleteReview =(req, res)=>{}
+const deleteAuthor =(req, res)=>{}
 
 
-module.exports={ getReviews, getReview, createReview, updateReview, deleteReview }
+module.exports={ getAuthors, getAuthor, createAuthor, updateAuthor, deleteAuthor }
