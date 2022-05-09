@@ -1,2 +1,0 @@
-PORT= 3000
-DB_URI=mongodb+srv://ferbaeza:D04qkq2ZjVNDkfwu@cluster0.ima6j.mongodb.net/booksReviews?retryWrites=true&w=majority
