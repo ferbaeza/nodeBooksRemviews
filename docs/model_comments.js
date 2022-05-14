@@ -1,35 +1,15 @@
-const express = require('express');
-const router = express.Router();
-const {getItems, getItem, createItem, updateItem, deleteItem} = require ("../controllers/reviews")
-const {validateNewReview, validateId}= require('../validators/reviews')
-const customHeader = require('../middlewares/customHeader') //check the api key
-
-
-//TODO get, post
-
-router.get("/", getItems)
-router.get("/:id",validateId,  getItem)
-router.post("/", validateNewReview, createItem)
-
-router.put("/:_id", validateId, validateNewReview, updateItem)
-router.delete("/:_id", validateId, deleteItem)
-
-
-module.exports = router;
-
-
 /**
  * !__GET__ALL_ITEMS
  */
 /**
- * Get all reviews
+ * Get all books
  * @swagger
- * /reviews:
+ * /books:
  *    get:
  *      tags:
- *        - reviews
- *      summary: "List all reviews"
- *      description: List all reviews with details
+ *        - books
+ *      summary: "List all books"
+ *      description: List all books with details
  *      responses:
  *        '200':
  *          description: .
@@ -44,10 +24,10 @@ module.exports = router;
 /**
  * Get book
  * @swagger
- * /reviews/{id}:
+ * /books/{id}:
  *    get:
  *      tags:
- *        - reviews
+ *        - books
  *      summary: "Get book"
  *      description: Get book detail
  *      responses:
@@ -75,10 +55,10 @@ module.exports = router;
 /**
  * Post new book
  * @swagger
- * /reviews:
+ * /books:
  *    post:
  *      tags:
- *        - reviews
+ *        - books
  *      summary: "Add book"
  *      description: Add new book with detail
  *      responses:
@@ -92,7 +72,7 @@ module.exports = router;
  *           description: "parametros requeridos para insertar comentrario"
  *           required: true
  *           schema:
- *              $ref: "#/definitions/reviews"
+ *              $ref: "#/definitions/books"
  *    responses:
  *      '201':
  *        description: retorna el objeto insertado en la coleccion con stado '201'
@@ -106,10 +86,10 @@ module.exports = router;
  /**
   * Upadte new book
   * @swagger
-  * /reviews/{id}:
+  * /books/{id}:
   *    put:
   *      tags:
-  *        - reviews
+  *        - books
   *      summary: "Update book"
   *      description: Update book with detail
   *      responses:
@@ -123,7 +103,7 @@ module.exports = router;
   *           description: "parametros requeridos para insertar comentrario"
   *           required: true
   *           schema:
-  *              $ref: "#/definitions/reviews"
+  *              $ref: "#/definitions/books"
   *        -  in: "path"
   *           name: "id"
   *           description: "ID book"
@@ -141,10 +121,10 @@ module.exports = router;
  /**
   * Delete book
   * @swagger
-  * /reviews/{id}:
+  * /books/{id}:
   *    delete:
   *      tags:
-  *        - reviews
+  *        - books
   *      summary: "Delete book"
   *      description: Delete book detail
   *      responses:

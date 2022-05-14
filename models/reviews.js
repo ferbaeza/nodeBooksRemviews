@@ -1,3 +1,4 @@
+const mongooseDelete = require('mongoose-delete')
 const mongoose = require("mongoose")
 
 const ReviewScheme = new mongoose.Schema(
@@ -17,6 +18,10 @@ const ReviewScheme = new mongoose.Schema(
             type:String,
         
         },
+        bookId:
+        {
+            type: mongoose.Types.ObjectId,
+        },
         reviewID:
         {
             type: mongoose.Types.ObjectId,
@@ -27,4 +32,7 @@ const ReviewScheme = new mongoose.Schema(
         versionKey: false
     }
 );
-module.exports = mongoose.model("Reviews", ReviewScheme)
+
+ReviewScheme.plugin(mongooseDelete, {overrideMethods: "all"});
+const Review= mongoose.model("Reviews", ReviewScheme);
+module.exports = Review;

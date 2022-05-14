@@ -1,54 +1,81 @@
 /**Importamos el Modelo */
-const { booksModel} =require("../models");
-
+const booksModel =require("../models/books");
+const {handleHttpError} = require('../utils/handleError')
+const { matchedData } = require('express-validator')
 
 
 /**
  * Obtener datos de BBDD
  */
-const getBooks = async (req, res)=>{
-    //const data = await booksModel.find({})
-    //res.send({data})
-    const data = ["hola","fer"]
-    res.send({data})
-    console.log(data)
+ const getItems = async (req, res)=>{
+    try{
+        const data = await booksModel.find({})
+        res.send({data})
+        console.log(data)
+    }catch(error){
+        handleHttpError(res)
+    }
+}
+const getItem= async(req, res)=>{
+    try{
+        req= matchedData(req);
+        const id = req;
+        console.log(id)
+        const data = await booksModel.findById(id);
+        res.send({data});
+    }catch(e){
+        handleHttpError(res, ERROR_GET_ITEM)
+    }
+}
+/**
+ * Crear un item nuevo
+ */
+const createItem = async(req, res)=>{
+    const body = matchedData(req)
+    console.log(body)
+    const data = new booksModel(body);
+    try{
+        await data.save();
+        res.status(200).send({data})
+    }catch(error){
+        handleHttpError(res, ERROR_GET_ITEMS)
+    }
+}
 
+/**
+ * Modificar un item
+ */
+const updateItem = async (req, res)=>{
+    console.log(req.body)
+    console.log(req.params)
+    const body = (req.body);
+    const id = (req.params);
+    try{
+        const data = await booksModel.findByIdAndUpdate(id, body);
+        res.status(200).send({data})
+    }catch(error){
+        handleHttpError(res, ERROR_UPDATE_ITEM)
+    }
 }
 
 
 
 /**
- * Obtener detalle del Libro
+ * Borrar un item
  */
-const getBook =(req, res)=>{
+const deleteItem =async (req, res)=>{
+    try{
+        req= matchedData(req);
+        const id = req;
+        console.log(id)
+        const data = await booksModel.delete(id);
+        res.status(200).send({data})
+    }catch(e){
+        //console.log(e)
+        handleHttpError(res, ERROR_DELETE_ITEM)
+    }
+
 }
 
 
-/**
- * Crear un libro nuevo
- */
-const createBook = async(req, res)=>{
-    /**Al ser recursivo usamos la destructuracion de JS
-     * cons body:body = req
-     * res.send({"Response":body})
-     */
-    const { body } = req;
-    console.log(body);
-    //const data = await booksModel.create(body);
-    res.send({"Response":body})
-}
-
-
-/**
- * Modificar un libro
- */
-const updateBook =(req, res)=>{}
-
-
-/**
- * Borrar un libro
- */
-const deleteBook =(req, res)=>{}
-
-
-module.exports={ getBooks, getBook, createBook, updateBook, deleteBook }
+module.exports={ getItems, getItem, createItem, updateItem, deleteItem }

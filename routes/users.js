@@ -1,17 +1,16 @@
 const express = require('express');
 const router = express.Router();
-const {getItems, getItem, createItem, updateItem, deleteItem} = require ("../controllers/reviews")
-const {validateNewReview, validateId}= require('../validators/reviews')
-const customHeader = require('../middlewares/customHeader') //check the api key
+const {getItems, getItem, createItem, updateItem, deleteItem} = require ("../controllers/users")
+const customHeader = require('../middlewares/customHeader')
+const {validateNewUser, validateId}= require('../validators/users')
 
 
 //TODO get, post
 
 router.get("/", getItems)
-router.get("/:id",validateId,  getItem)
-router.post("/", validateNewReview, createItem)
-
-router.put("/:_id", validateId, validateNewReview, updateItem)
+router.get("/:_id", validateId, getItem)
+router.post("/", validateNewUser, customHeader, createItem)
+router.put("/:_id", validateId, validateNewUser, updateItem)
 router.delete("/:_id", validateId, deleteItem)
 
 
@@ -22,14 +21,14 @@ module.exports = router;
  * !__GET__ALL_ITEMS
  */
 /**
- * Get all reviews
+ * Get all users
  * @swagger
- * /reviews:
+ * /users:
  *    get:
  *      tags:
- *        - reviews
- *      summary: "List all reviews"
- *      description: List all reviews with details
+ *        - users
+ *      summary: "List all users"
+ *      description: List all users with details
  *      responses:
  *        '200':
  *          description: .
@@ -44,10 +43,10 @@ module.exports = router;
 /**
  * Get book
  * @swagger
- * /reviews/{id}:
+ * /users/{id}:
  *    get:
  *      tags:
- *        - reviews
+ *        - users
  *      summary: "Get book"
  *      description: Get book detail
  *      responses:
@@ -75,10 +74,10 @@ module.exports = router;
 /**
  * Post new book
  * @swagger
- * /reviews:
+ * /users:
  *    post:
  *      tags:
- *        - reviews
+ *        - users
  *      summary: "Add book"
  *      description: Add new book with detail
  *      responses:
@@ -92,7 +91,7 @@ module.exports = router;
  *           description: "parametros requeridos para insertar comentrario"
  *           required: true
  *           schema:
- *              $ref: "#/definitions/reviews"
+ *              $ref: "#/definitions/users"
  *    responses:
  *      '201':
  *        description: retorna el objeto insertado en la coleccion con stado '201'
@@ -106,10 +105,10 @@ module.exports = router;
  /**
   * Upadte new book
   * @swagger
-  * /reviews/{id}:
+  * /users/{id}:
   *    put:
   *      tags:
-  *        - reviews
+  *        - users
   *      summary: "Update book"
   *      description: Update book with detail
   *      responses:
@@ -123,7 +122,7 @@ module.exports = router;
   *           description: "parametros requeridos para insertar comentrario"
   *           required: true
   *           schema:
-  *              $ref: "#/definitions/reviews"
+  *              $ref: "#/definitions/users"
   *        -  in: "path"
   *           name: "id"
   *           description: "ID book"
@@ -141,10 +140,10 @@ module.exports = router;
  /**
   * Delete book
   * @swagger
-  * /reviews/{id}:
+  * /users/{id}:
   *    delete:
   *      tags:
-  *        - reviews
+  *        - users
   *      summary: "Delete book"
   *      description: Delete book detail
   *      responses:

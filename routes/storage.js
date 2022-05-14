@@ -1,35 +1,36 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const {getItems, getItem, createItem, updateItem, deleteItem} = require ("../controllers/reviews")
-const {validateNewReview, validateId}= require('../validators/reviews')
-const customHeader = require('../middlewares/customHeader') //check the api key
+const path = require("path");
+const upploadMiddleware= require('../utils/handleStorage')
+const {getItems, getItem, createItem, deleteItem} = require("../controllers/storage")
+const {validateId}= require('../validators/storage')
 
+//TODO ==> http://localhost:3000/api/storage
 
-//TODO get, post
+/**
+ * 
+ */
 
-router.get("/", getItems)
-router.get("/:id",validateId,  getItem)
-router.post("/", validateNewReview, createItem)
+router.get('', getItems)
+router.get('/:_id', validateId, getItem)
+router.post('',upploadMiddleware.single("myfile"), createItem)
+router.delete('/:_id', validateId, deleteItem)
 
-router.put("/:_id", validateId, validateNewReview, updateItem)
-router.delete("/:_id", validateId, deleteItem)
-
-
-module.exports = router;
+module.exports= router;
 
 
 /**
  * !__GET__ALL_ITEMS
  */
 /**
- * Get all reviews
+ * Get all storage
  * @swagger
- * /reviews:
+ * /storage:
  *    get:
  *      tags:
- *        - reviews
- *      summary: "List all reviews"
- *      description: List all reviews with details
+ *        - storage
+ *      summary: "List all storage"
+ *      description: List all storage with details
  *      responses:
  *        '200':
  *          description: .
@@ -44,10 +45,10 @@ module.exports = router;
 /**
  * Get book
  * @swagger
- * /reviews/{id}:
+ * /storage/{id}:
  *    get:
  *      tags:
- *        - reviews
+ *        - storage
  *      summary: "Get book"
  *      description: Get book detail
  *      responses:
@@ -75,10 +76,10 @@ module.exports = router;
 /**
  * Post new book
  * @swagger
- * /reviews:
+ * /storage:
  *    post:
  *      tags:
- *        - reviews
+ *        - storage
  *      summary: "Add book"
  *      description: Add new book with detail
  *      responses:
@@ -92,7 +93,7 @@ module.exports = router;
  *           description: "parametros requeridos para insertar comentrario"
  *           required: true
  *           schema:
- *              $ref: "#/definitions/reviews"
+ *              $ref: "#/definitions/storage"
  *    responses:
  *      '201':
  *        description: retorna el objeto insertado en la coleccion con stado '201'
@@ -106,10 +107,10 @@ module.exports = router;
  /**
   * Upadte new book
   * @swagger
-  * /reviews/{id}:
+  * /storage/{id}:
   *    put:
   *      tags:
-  *        - reviews
+  *        - storage
   *      summary: "Update book"
   *      description: Update book with detail
   *      responses:
@@ -123,7 +124,7 @@ module.exports = router;
   *           description: "parametros requeridos para insertar comentrario"
   *           required: true
   *           schema:
-  *              $ref: "#/definitions/reviews"
+  *              $ref: "#/definitions/storage"
   *        -  in: "path"
   *           name: "id"
   *           description: "ID book"
@@ -141,10 +142,10 @@ module.exports = router;
  /**
   * Delete book
   * @swagger
-  * /reviews/{id}:
+  * /storage/{id}:
   *    delete:
   *      tags:
-  *        - reviews
+  *        - storage
   *      summary: "Delete book"
   *      description: Delete book detail
   *      responses:

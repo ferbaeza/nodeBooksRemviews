@@ -1,3 +1,4 @@
+const mongooseDelete = require('mongoose-delete')
 const mongoose = require("mongoose")
 
 const ComplainScheme = new mongoose.Schema(
@@ -17,6 +18,10 @@ const ComplainScheme = new mongoose.Schema(
             type:String,
         
         },
+        reviewID:
+        {
+            type: mongoose.Types.ObjectId,
+        },
         complainID:
         {
             type: mongoose.Types.ObjectId,
@@ -27,4 +32,7 @@ const ComplainScheme = new mongoose.Schema(
         versionKey: false
     }
 );
-module.exports = mongoose.model("Complain", ComplainScheme)
+
+ComplainScheme.plugin(mongooseDelete, {overrideMethods: "all"});
+const Complain = mongoose.model("Complain", ComplainScheme)
+module.exports =Complain;

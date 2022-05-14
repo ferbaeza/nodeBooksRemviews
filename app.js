@@ -5,6 +5,16 @@ const dbConnect = require('./config/mongo')
 const path = require('path');
 const app = express();
 
+
+const swaggerUi = require("swagger-ui-express");
+const swaggerSpec = require("./docs/swagger");
+
+/**
+ * API - Documentation
+ */
+ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+
 /**
  * Gracias a dotenv podemos utilizar os archivos de configuracion de
  * nuestra app, declarar las constantes y asi proteger nuestros datos de bbdd
@@ -13,14 +23,15 @@ const app = express();
  */
 const port = process.env.PORT || 5000;
 
+app.use(express.json());
+app.use(cors());
+app.use(express.static('storage'))
 
 /**
  * Es necesario declarar el uso de cores en express para el acceso a la API
  * @params express.json() lo necesitamos para poder realizar los registros a traves
  * de nuestra ruta post
  */
-app.use(cors());
-app.use(express.json());
 
 /**
  * * **Invocamos a las **Routes*** 
