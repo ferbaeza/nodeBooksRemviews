@@ -21,7 +21,7 @@ const swaggerSpec = require("./docs/swagger");
  * @params en caso de que falle nuestra constante PORT
  * * le asignamos un valor secundario
  */
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(cors());
