@@ -12,10 +12,6 @@ const AuthorScheme = new mongoose.Schema(
         {
             type:String,
             unique: false,
-        },
-        bookId:
-        {
-            type: mongoose.Types.ObjectId,
         }
     },
     {

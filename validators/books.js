@@ -10,7 +10,6 @@ const validateNewBook=[
     check('editorial').exists().notEmpty(),
     check('synopsis').exists().notEmpty(),
     check('isbn').exists().notEmpty(),
-    check('authorId').exists().notEmpty().isMongoId(),
     (req, res, next)=>{
         return validate(req, res, next)
     } 

@@ -27,9 +27,6 @@ const BookScheme = new mongoose.Schema({
     },
     isbn:{
         type: String
-    },
-    authorId:{
-        type: mongoose.Types.ObjectId,
     }
 },
 {
@@ -37,19 +34,19 @@ const BookScheme = new mongoose.Schema({
     versionKey: false
 }
 );
-BookScheme.statics.findAll= function(){
-    const joinData= this.aggregate([
-        {
-            $lookup:{
-                from: "authors",
-                localfield: "authorId",
-                foreignField:"_id",
-                as:"Autores"
-            }
-        }
-    ])
-    return joinData;
-}
+// BookScheme.statics.findAll= function(){
+//     const joinData= this.aggregate([
+//         {
+//             $lookup:{
+//                 from: "authors",
+//                 localfield: "authorId",
+//                 foreignField:"_id",
+//                 as:"Autores"
+//             }
+//         }
+//     ])
+//     return joinData;
+// }
 
 
 

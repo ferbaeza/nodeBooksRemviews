@@ -4,7 +4,6 @@ const validate = require('../utils/handleValidate')
 const validateNewAuthor=[
     check('name').exists().notEmpty(),
     check('nickname').exists().notEmpty(),
-    check('bookId').exists().notEmpty().isMongoId(),
     (req, res, next)=>{
         return validate(req, res, next)
     } 

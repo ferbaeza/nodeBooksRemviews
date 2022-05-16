@@ -92,7 +92,7 @@ router.get("/:_id", validateId, getItem)
  *        description: retorna el objeto insertado en la coleccion con stado '201'
  */
 
-router.post("/", validateNewBook, customHeader, createItem)
+router.post("/", validateNewBook, createItem)
 
 
 /**
